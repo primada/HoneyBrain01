@@ -1,0 +1,121 @@
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
+
+
+public class HoneyChatpos extends JFrame implements ActionListener{//손님
+
+	JFrame frame;//프레임추가
+	JPanel jtable,jmenu,jchat;	
+	JButton[] menu = new JButton[10];
+	JButton[] table = new JButton[9];
+	
+	JTextArea view;
+	JTextField text;
+	JButton send;
+	String[] m ={"허니버터칩","치즈커리","신라면","파워에이드","짜장면배달","생수","아메리카노","드림카카오","새우탕면","불닭볶음"}; 
+	
+	public HoneyChatpos(){
+		
+		//con = getContentPane();  
+				jmenu = new JPanel();//메뉴를 올릴 패널
+				jmenu.setLayout(new GridLayout(10,1,10,10));
+				jmenu.setBorder(new BevelBorder(BevelBorder.LOWERED));
+
+				//jmenu.setAlignmentX(JButton.RIGHT_ALIGNMENT);
+				for(int i=0; i < 10; i++){ //메뉴생성
+					menu[i] = new JButton(m[i]);
+				}
+				for(int i=0; i < 10; i++){//메뉴에리스너추가
+					jmenu.add(menu[i]);
+					menu[i].addActionListener(this);
+					
+					
+					//menu[i].setSize(400,400);
+					//menu[i].setBounds(100,200,300,400);
+				}
+				
+				jtable = new JPanel();//테이블 올릴 패널
+				jtable.setLayout(new GridLayout(3,3,10,10));
+				for(int i=0; i < 9; i++){ 
+					table[i] = new JButton((i+1)+"테이블");
+				}
+				for(int i=0; i < 9; i++){//메뉴에리스너추가
+					jtable.add(table[i]);
+					table[i].addActionListener(this);
+					table[i].setSize(500,100);
+				}
+				
+				jchat = new JPanel();	
+				//jchat.setLayout(null);
+				jchat.setLayout(new FlowLayout());
+				
+
+				//jchat.setLayout(new FlowLayout(FlowLayout.CENTER));
+				view = new JTextArea(10,50);
+				text = new JTextField(30);
+				send = new JButton("전송");
+				//view.setBounds(100,200,80,30);
+				jchat.add(view);
+				jchat.add(text);
+				jchat.add(send);
+				send.setLocation(200,100);
+
+				//view.setBounds();
+				
+				JScrollPane scrollPane = new JScrollPane(jchat,
+						JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, 
+						JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+				
+				///this.add(jtable, BorderLayout.NORTH);
+				//this.add(jmenu, BorderLayout.CENTER);
+				add(jtable,BorderLayout.WEST);
+				add(jmenu,BorderLayout.EAST);
+				add(jmenu);
+				//jmenu.setAlignmentX( Component.LEFT_ALIGNMENT );//0.0
+
+
+				add(jchat,BorderLayout.SOUTH);
+				
+				
+		
+		//ChatPosHost ch = new ChatPosHost(); //점원이 보는 화면
+		//ChatPosClient cc = new ChatPosClient(); //손님이 보는 화면
+		
+		//add(ch);
+		//--------------------------------------------------------
+		setTitle("메뉴계산기");
+		//setSize(1200,900);
+		setBounds(100,100,1000,800);		
+		//setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		Object obj = e.getSource();
+		if((JButton)obj == menu[1]){
+			table[1].setText("honey");
+		}
+	}//점원이 보는 화면
+
+	public static void main(String[] args) {
+		new HoneyChatpos();
+
+	}
+
+}
+
